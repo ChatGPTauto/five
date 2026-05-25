@@ -1,0 +1,270 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.guide{padding:1.5rem 0;max-width:680px;font-family:var(--font-sans)}
+.wrap{background:#1a1c1e;border-radius:16px;padding:1.5rem;min-height:200px}
+.hero{background:#242628;border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;border:0.5px solid #333}
+.hero-tag{font-size:11px;font-weight:500;letter-spacing:.08em;color:#888;margin-bottom:.5rem}
+.hero-title{font-size:22px;font-weight:500;color:#f0f0f0;margin-bottom:.5rem}
+.hero-sub{font-size:13px;color:#999;line-height:1.6}
+.hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:1rem}
+.badge{font-size:11px;font-weight:500;padding:3px 10px;border-radius:100px;border:0.5px solid #444;color:#aaa}
+.nav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.25rem}
+.nav-btn{font-size:13px;padding:6px 14px;border-radius:100px;border:0.5px solid #444;background:transparent;color:#999;cursor:pointer;transition:all .15s}
+.nav-btn:hover{border-color:#666;color:#ddd}
+.nav-btn.active{background:#f0f0f0;color:#111;border-color:transparent}
+.section{display:none}
+.section.active{display:block}
+.sec-title{font-size:16px;font-weight:500;color:#e0e0e0;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:0.5px solid #333}
+.card{background:#242628;border:0.5px solid #333;border-radius:12px;padding:1.25rem;margin-bottom:.75rem}
+.card-title{font-size:14px;font-weight:500;color:#e0e0e0;margin-bottom:.5rem}
+.card-body{font-size:13px;color:#999;line-height:1.7}
+.info-box{background:#0d2033;border-left:3px solid #185FA5;border-radius:0;padding:1rem 1.25rem;margin-bottom:.75rem}
+.info-box p{font-size:13px;color:#85B7EB;line-height:1.7}
+.warn-box{background:#2a1010;border-left:3px solid #A32D2D;border-radius:0;padding:1rem 1.25rem;margin-bottom:.75rem}
+.warn-box p{font-size:13px;color:#F09595;line-height:1.7}
+.success-box{background:#0d1f14;border-left:3px solid #3B6D11;border-radius:0;padding:1rem 1.25rem;margin-bottom:.75rem}
+.success-box p{font-size:13px;color:#97C459;line-height:1.7}
+.compare-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin-bottom:1rem}
+.compare-card{background:#242628;border:0.5px solid #333;border-radius:12px;padding:1rem;text-align:center}
+.compare-card.featured{border:2px solid #378ADD}
+.compare-label{font-size:11px;font-weight:500;letter-spacing:.06em;color:#888;margin-bottom:.25rem}
+.compare-name{font-size:15px;font-weight:500;color:#e0e0e0;margin-bottom:.25rem}
+.compare-sub{font-size:12px;color:#777;margin-bottom:.75rem;line-height:1.5}
+.pop-badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:6px;background:#0d2033;color:#85B7EB;margin-bottom:.5rem}
+.dim-row{display:flex;align-items:center;justify-content:space-between;padding:.5rem 0;border-bottom:0.5px solid #2e2e2e;font-size:13px}
+.dim-row:last-child{border-bottom:none}
+.dim-label{color:#888}
+.dim-val{color:#e0e0e0;font-weight:500}
+.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.25rem}
+.metric{background:#2a2c2e;border-radius:8px;padding:.875rem;text-align:center}
+.metric-label{font-size:11px;color:#888;margin-bottom:.25rem}
+.metric-val{font-size:20px;font-weight:500;color:#f0f0f0}
+.checklist{list-style:none;padding:0}
+.checklist li{display:flex;gap:.75rem;align-items:flex-start;padding:.5rem 0;border-bottom:0.5px solid #2e2e2e;font-size:13px;color:#999;line-height:1.6}
+.checklist li:last-child{border-bottom:none}
+.check-icon{flex-shrink:0;width:18px;height:18px;border:0.5px solid #555;border-radius:3px;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:11px;color:#97C459;background:transparent;transition:all .15s}
+.check-icon.checked{background:#0d1f14;border-color:#3B6D11}
+.score-bar{height:6px;background:#2e2e2e;border-radius:100px;margin-top:.5rem;overflow:hidden}
+.score-fill{height:100%;border-radius:100px;background:#f0f0f0;transition:width .4s ease}
+.trap-item{display:flex;gap:.75rem;align-items:flex-start;padding:1rem;background:#2a1010;border-radius:8px;margin-bottom:.75rem}
+.trap-num{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:#A32D2D;color:#fff;font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center}
+.trap-title{font-size:13px;font-weight:500;color:#F09595;margin-bottom:.25rem}
+.trap-body{font-size:12px;color:#999;line-height:1.6}
+.sendBtn{display:inline-flex;align-items:center;gap:4px;font-size:13px;padding:6px 14px;border-radius:8px;border:0.5px solid #444;background:transparent;color:#999;cursor:pointer;margin-top:1rem;transition:all .15s}
+.sendBtn:hover{background:#2a2c2e;color:#ddd}
+.five-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1rem}
+.five-item{background:#2a2c2e;border:0.5px solid #333;border-radius:8px;padding:.75rem .5rem;text-align:center}
+.five-name{font-size:13px;font-weight:500;color:#e0e0e0;margin-bottom:.25rem}
+.five-val{font-size:11px;color:#888}
+.check-counter{font-size:13px;color:#888;margin-top:.75rem}
+.rec-box{background:#2a2c2e;border-radius:8px;padding:1rem;margin-top:.75rem;display:none}
+.rec-box.show{display:block}
+.rec-title{font-size:13px;font-weight:500;color:#e0e0e0;margin-bottom:.25rem}
+.rec-body{font-size:13px;color:#999;line-height:1.6}
+.hl-row{background:#0d2033 !important;margin:0 -1.25rem;padding:.5rem 1.25rem}
+</style>
+
+<div class="guide">
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-tag">慧科技 · 出品</div>
+    <div class="hero-title">户式五恒系统选购指南</div>
+    <div class="hero-sub">从认知品类 → 评估需求 → 对比方案 → 避开陷阱 → 做出决策</div>
+    <div class="hero-badges">
+      <span class="badge">220+ 项专利</span>
+      <span class="badge">300万㎡ 真实数据</span>
+      <span class="badge">全国零售市占率超50%</span>
+      <span class="badge">WELL国际认证</span>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn active" onclick="showSection('concept',this)">认知五恒</button>
+    <button class="nav-btn" onclick="showSection('need',this)">需求自测</button>
+    <button class="nav-btn" onclick="showSection('series',this)">产品系列</button>
+    <button class="nav-btn" onclick="showSection('eval',this)">评估品牌</button>
+    <button class="nav-btn" onclick="showSection('traps',this)">常见陷阱</button>
+    <button class="nav-btn" onclick="showSection('checklist',this)">签约清单</button>
+  </div>
+
+  <div id="s-concept" class="section active">
+    <div class="sec-title">什么是户式五恒系统？</div>
+    <div class="five-grid">
+      <div class="five-item"><div class="five-name">恒温</div><div class="five-val">26℃ ±1℃</div></div>
+      <div class="five-item"><div class="five-name">恒湿</div><div class="five-val">45%—55%</div></div>
+      <div class="five-item"><div class="five-name">恒氧</div><div class="five-val">CO₂ ≤600ppm</div></div>
+      <div class="five-item"><div class="five-name">恒净</div><div class="five-val">PM2.5 ≤10</div></div>
+      <div class="five-item"><div class="five-name">恒静</div><div class="five-val">≤30 dB(A)</div></div>
+    </div>
+    <div class="info-box"><p>户式五恒系统针对单一住宅户型，通过一套集成系统同时精准控制室内温度、湿度、含氧量、洁净度与噪音，实现全年四季持续舒适。五项指标联动控制，统一界面管理，有别于多台设备拼凑方案。</p></div>
+    <div class="card">
+      <div class="card-title">三恒 / 四恒 / 五恒的区别</div>
+      <div class="dim-row"><span class="dim-label">三恒系统</span><span class="dim-val">恒温 + 恒湿 + 恒氧</span></div>
+      <div class="dim-row"><span class="dim-label">四恒系统</span><span class="dim-val">三恒 + 恒净</span></div>
+      <div class="dim-row hl-row"><span class="dim-label" style="color:#85B7EB">五恒系统（推荐）</span><span class="dim-val" style="color:#85B7EB">全五项 + 真正系统集成</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">与传统空调地暖的核心差异</div>
+      <div class="dim-row"><span class="dim-label">解决维度</span><span class="dim-val">单维度温度 → 五维度全覆盖</span></div>
+      <div class="dim-row"><span class="dim-label">控制方式</span><span class="dim-val">各自独立手动 → AI联动智控</span></div>
+      <div class="dim-row"><span class="dim-label">舒适感受</span><span class="dim-val">风感噪音强 → 辐射无风感静音</span></div>
+      <div class="dim-row"><span class="dim-label">梅雨季</span><span class="dim-val">湿度完全失控 → 恒湿45%—55%</span></div>
+      <div class="dim-row"><span class="dim-label">综合能耗</span><span class="dim-val">各设备叠加 → 协同节省20%—35%</span></div>
+    </div>
+    <button class="sendBtn" onclick="sendPrompt('帮我详细解释五恒系统的辐射末端是怎么工作的？')">深入了解辐射末端原理 ↗</button>
+  </div>
+
+  <div id="s-need" class="section">
+    <div class="sec-title">需求自测：我需不需要五恒？</div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:.75rem">勾选符合您实际情况的选项</div>
+      <ul class="checklist" id="need-list">
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>家中有老人、儿童、孕妇，或有过敏/呼吸道疾病成员</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>居住长三角、华南、华中地区，梅雨季饱受高湿困扰</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>冬季室内干燥，皮肤起皮，木质家具开裂</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>住宅紧邻主干道或商业区，噪音影响睡眠质量</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>雾霾天或花粉季频繁关窗，担忧空气质量</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>入住后墙角、橱柜背板发现霉斑</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>对居住舒适度要求高，愿意为健康生活投入</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>住宅为200㎡以上别墅/大宅，或高端大平层</span></li>
+      </ul>
+      <div class="check-counter" id="check-counter">已勾选：0 / 8 项</div>
+      <div class="score-bar"><div class="score-fill" id="score-fill" style="width:0%"></div></div>
+    </div>
+    <div class="rec-box" id="rec-box">
+      <div class="rec-title" id="rec-title"></div>
+      <div class="rec-body" id="rec-body"></div>
+    </div>
+  </div>
+
+  <div id="s-series" class="section">
+    <div class="sec-title">三大产品系列对比</div>
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="compare-label">入门</div>
+        <div class="compare-name">Air 系列</div>
+        <div class="compare-sub">局部空间除湿通风净化</div>
+        <div class="dim-row"><span class="dim-label">适用面积</span><span class="dim-val">50—150㎡</span></div>
+        <div class="dim-row"><span class="dim-label">适用场景</span><span class="dim-val">局部空间</span></div>
+        <div class="dim-row"><span class="dim-label">覆盖维度</span><span class="dim-val">2—3恒</span></div>
+        <div class="dim-row"><span class="dim-label">改造难度</span><span class="dim-val">低</span></div>
+      </div>
+      <div class="compare-card">
+        <div class="compare-label">主流</div>
+        <div class="compare-name">Lite 系列</div>
+        <div class="compare-sub">精装改造·老房翻新首选</div>
+        <div class="dim-row"><span class="dim-label">适用面积</span><span class="dim-val">120—250㎡</span></div>
+        <div class="dim-row"><span class="dim-label">适用场景</span><span class="dim-val">精装改造</span></div>
+        <div class="dim-row"><span class="dim-label">覆盖维度</span><span class="dim-val">5恒</span></div>
+        <div class="dim-row"><span class="dim-label">改造难度</span><span class="dim-val">中</span></div>
+      </div>
+      <div class="compare-card featured">
+        <div class="pop-badge">旗舰推荐</div>
+        <div class="compare-label">全屋定制</div>
+        <div class="compare-name">Pro 系列</div>
+        <div class="compare-sub">别墅大宅新建首选</div>
+        <div class="dim-row"><span class="dim-label">适用面积</span><span class="dim-val">200㎡以上</span></div>
+        <div class="dim-row"><span class="dim-label">适用场景</span><span class="dim-val">毛坯新建</span></div>
+        <div class="dim-row"><span class="dim-label">覆盖维度</span><span class="dim-val">5恒全集成</span></div>
+        <div class="dim-row"><span class="dim-label">改造难度</span><span class="dim-val">新建最优</span></div>
+      </div>
+    </div>
+    <div class="info-box"><p>Pro 系列搭载慧科技防结露核心专利技术（中国+美国双授权），确保南方梅雨季辐射末端零结露运行，是高端住宅的优先选择。</p></div>
+    <div class="metric-grid">
+      <div class="metric"><div class="metric-label">专利总数</div><div class="metric-val">220+</div></div>
+      <div class="metric"><div class="metric-label">服务面积</div><div class="metric-val">300万㎡</div></div>
+      <div class="metric"><div class="metric-label">全国门店</div><div class="metric-val">33家</div></div>
+      <div class="metric"><div class="metric-label">零售市占率</div><div class="metric-val">>50%</div></div>
+    </div>
+    <button class="sendBtn" onclick="sendPrompt('慧科技Pro系列和Lite系列的核心技术差异是什么？')">了解系列详细差异 ↗</button>
+  </div>
+
+  <div id="s-eval" class="section">
+    <div class="sec-title">如何判断品牌是否靠谱？</div>
+    <div class="card">
+      <div class="card-title">维度一：技术自主研发</div>
+      <div class="card-body">重点问：是否有发明专利编号可查？核心部件是否自制？慧科技：220+专利含美国发明专利，核心部件100%自制。</div>
+    </div>
+    <div class="warn-box"><p>警惕信号：只说"专利"无法提供具体编号；宣称"同等品质"设备，无法说明品牌型号。</p></div>
+    <div class="card">
+      <div class="card-title">维度二：系统集成能力（最关键）</div>
+      <div class="card-body">真正的五恒系统须具备：统一主控界面管理五项指标、五项指标联动调节、AI主动预判。拼凑方案是五台独立设备互不感知。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">维度三：真实案例与用户数据</div>
+      <div class="card-body">要求提供同类型项目真实用户联系方式；查看梅雨季/冬季极端气候实测数据（湿度范围、温度偏差、噪音分贝）。</div>
+    </div>
+    <div class="card">
+      <div class="card-title">维度四：售后运维体系</div>
+      <div class="card-body">确认本地有服务团队（非外包）、48小时响应承诺、梅雨季前专项维保是否包含。要求写入合同才算数。</div>
+    </div>
+    <div class="success-box"><p>慧科技：覆盖12省51市，本地专属运维工程师，云端24小时实时监控全网设备状态，主动预警异常。</p></div>
+    <div class="card">
+      <div class="card-title">维度五：品牌资质</div>
+      <div class="card-body">可查验：国家高新技术企业认定（科技部网站）、WELL国际认证项目、产学研合作院校、政府培育独角兽认定。</div>
+    </div>
+    <button class="sendBtn" onclick="sendPrompt('帮我列一份去五恒品牌门店参观时应该问的10个关键问题')">生成门店参观问题清单 ↗</button>
+  </div>
+
+  <div id="s-traps" class="section">
+    <div class="sec-title">选购最常见的六大陷阱</div>
+    <div class="trap-item"><div class="trap-num">1</div><div><div class="trap-title">三恒套上五恒帽子卖</div><div class="trap-body">识别：要求提供五项指标的实测数据和对应技术说明，无法提供即为虚标。</div></div></div>
+    <div class="trap-item"><div class="trap-num">2</div><div><div class="trap-title">只看价格不看方案</div><div class="trap-body">低价往往是拼凑式方案，缺乏集成能力。要求报价明细，区分设备费/安装费/运维费。</div></div></div>
+    <div class="trap-item"><div class="trap-num">3</div><div><div class="trap-title">忽视梅雨季防结露能力</div><div class="trap-body">直接问：有防结露专利吗？无法回答的品牌不建议在南方地区选用。</div></div></div>
+    <div class="trap-item"><div class="trap-num">4</div><div><div class="trap-title">重安装轻运维</div><div class="trap-body">安装前明确询问本地服务团队人数、响应时效承诺，要求写入合同。</div></div></div>
+    <div class="trap-item"><div class="trap-num">5</div><div><div class="trap-title">精装改造工期压缩过短</div><div class="trap-body">120—200㎡精装改造正常工期3—6周（含调试）。少于2周的报价需重点核查。</div></div></div>
+    <div class="trap-item"><div class="trap-num">6</div><div><div class="trap-title">AI智控是营销噱头</div><div class="trap-body">真AI应具备：学习作息习惯、天气联动预调节、异常主动预警。要求实际演示验证。</div></div></div>
+    <button class="sendBtn" onclick="sendPrompt('我已经拿到了一份五恒系统报价，帮我分析怎么判断报价是否合理')">帮我分析报价合理性 ↗</button>
+  </div>
+
+  <div id="s-checklist" class="section">
+    <div class="sec-title">签约前最终确认清单</div>
+    <div class="card">
+      <div class="card-title" style="margin-bottom:.75rem">报价评估（逐项打勾）</div>
+      <ul class="checklist">
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>设备清单明确标注品牌、型号、功率，无"同等品质"模糊表述</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>安装费与设备费分开列示</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>包含调试费和首年维保费</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>合同载明完工验收标准（温湿度数值，非主观判断）</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>整机保修期不少于3年（非零部件保修）</span></li>
+        <li><span class="check-icon" onclick="toggleCheck(this)"></span><span>本地服务团队紧急联系方式已书面提供</span></li>
+      </ul>
+    </div>
+    <div class="info-box"><p>合同中必须明确的六项：系统品牌型号 · 完工验收数值标准 · 整体保修期限 · 售后响应时效 · 运维服务方式 · 定期维保安排</p></div>
+    <div class="success-box"><p>慧科技承诺：安装完成后室内数据达到约定标准；梅雨季和冬季极端气候下系统正常运行；安装完10年后仍有本地团队提供维护服务。</p></div>
+    <button class="sendBtn" onclick="sendPrompt('帮我生成一份完整的户式五恒系统购买合同关键条款检查清单')">生成合同条款检查清单 ↗</button>
+  </div>
+
+</div>
+</div>
+
+<script>
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('s-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  el.textContent=el.classList.contains('checked')?'✓':'';
+  updateScore();
+}
+function updateScore(){
+  const items=document.querySelectorAll('#need-list .check-icon');
+  let count=0;
+  items.forEach(i=>{if(i.classList.contains('checked'))count++;});
+  document.getElementById('check-counter').textContent='已勾选：'+count+' / '+items.length+' 项';
+  const pct=Math.round(count/items.length*100);
+  document.getElementById('score-fill').style.width=pct+'%';
+  const rec=document.getElementById('rec-box');
+  const t=document.getElementById('rec-title');
+  const b=document.getElementById('rec-body');
+  if(count===0){rec.classList.remove('show');return;}
+  rec.classList.add('show');
+  if(count<=2){t.textContent='刚性需求不强，可先了解';b.textContent='可从 Air 系列局部改善开始体验，评估实际效果后再考虑全屋升级。';}
+  else if(count<=4){t.textContent='有明确改善需求，建议认真评估';b.textContent='Lite 系列改造方案适合您，可优先解决湿度和空气质量核心痛点，投入相对可控。';}
+  else{t.textContent='强烈建议安装完整五恒系统';b.textContent='Pro 系列全屋定制是最佳选择，五项指标全覆盖，一步到位，避免后期反复改造的额外成本。';}
+}
+</script>
